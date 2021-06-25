@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Thread</title>
+</head>
+
+<body>
+    <span class = 'heading' id = 'title' onclick = 'toggle()'></span>
+
+    <div id='starting'>
+        <button id = 'newpost' onclick = 'startEdit()'>Create Post</button>
+    </div>
+
+    <div id='editing' style='display: none'>
+        <textarea id='in_title' rows = '1' cols = '10'></textarea>
+        <br>
+        <textarea id='box' rows='10' cols='115'></textarea>
+        <button id='submit' onclick='stopEdit()'>submit</button>
+    </div>
+
+    <div id = 'finished' style = 'display:none'>
+        <span id = 'finishedpost'></span>
+        <br>
+        <button id='edit' onclick='startEdit()'>edit</button>
+    </div>
+
+    <script>
+        function startEdit() {
+            document.getElementById('title').style.display = 'none';
+            document.getElementById('editing').style.display = 'block';
+            document.getElementById('finished').style.display = 'none';
+            document.getElementById('starting').style.display = 'none';
+        }
+
+        function stopEdit() {
+            document.getElementById('editing').style.display='none';
+            document.getElementById('finishedpost').innerText=document.getElementById('box').value;
+            document.getElementById('title').innerText=document.getElementById('in_title').value;
+            document.getElementById('finished').style.display = 'block';
+            document.getElementById('title').style.display = 'block';
+        }
+
+        function toggle(){
+            if (document.getElementById('finished').style.display == 'none'){
+                document.getElementById('finished').style.display = 'block';
+            }
+            else{
+                document.getElementById('finished').style.display = 'none';
+            }
+        }
+    </script>
+
+    <style>
+        .heading{
+            background: none;
+            border:none;
+            font-size: large;
+            font-weight: bold;
+        }
+        body {
+            font-family: system-ui;
+        }
+
+        #content {
+            display: none;
+        }
+
+        #content:target {
+            display: block;
+        }
+
+        input,
+        button,
+        textarea {
+            font-family: system-ui;
+        }
+
+        input,
+        button {
+            border: 1px solid black;
+            border-radius: 2px;
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+
+        #text {
+            display: block;
+        }
+
+        button {
+            display: block;
+            margin-top: 1em;
+        }
+    </style>
+</body>
+
+</html>
