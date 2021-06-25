@@ -1,0 +1,142 @@
+<!-- 
+Made by Leo Zhang
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Text Box</title>
+        
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            #post {
+                background-color: lightgray;
+                margin: 20px;
+                padding: 10px;
+                border-radius: 5px;
+                display: grid;
+                grid-template-columns: 100px auto;
+                grid-template-rows: auto auto;
+                grid-gap: 10px;
+            }
+
+            #voting {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #votes {
+                display: inline;
+                padding: 5px 10px;
+                background-color: lightgray;
+                border-radius: 3px;
+            }
+
+            .voteButton {
+                color: white;
+                border: none;
+                border-radius: 3px;
+                width: 30px;
+                height: 30px;
+                margin: 10px;
+            }
+
+            .upvoteButton {
+                background-color: green;
+            }
+
+            .upvoteButton:hover {
+                cursor: pointer;
+                background-color: #006400;
+            }
+
+            .downvoteButton {
+                background-color: red;
+            }
+
+            .downvoteButton:hover {
+                cursor: pointer;
+                background-color: #8b0000;
+            }
+
+            #title {
+                align-self: center;
+            }
+
+            #title:hover {
+                cursor: pointer;
+            }
+
+            #content {
+                grid-column: 2 / 3;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id='post'>
+            <div id='voting'>
+                <input type='button' class='voteButton upvoteButton' value='&#8593;' onclick='changeScore(1);'>
+                <span id='votes'>0</span>
+                <input type='button' class='voteButton downvoteButton' value='&#8595;' onclick='changeScore(-1);'>
+            </div>
+
+            <h1 id='title' onclick='displayContent();'>Title</h1>
+            <input type='text' id='titleEdit' style='display: none;'>
+
+            <span id='answer1' style='display: none;'>
+                <textarea id='textBox' rows='10' cols='115' name='submission'></textarea><br>
+                <button id='submit' onclick='submitText();'>Submit</button>
+            </span>
+
+            <div id='content' style='display: none;'>
+                <span id='text1'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto facilis id voluptatum error veniam necessitatibus, exercitationem quasi, odio a, magni quidem consectetur! Sequi sint nesciunt quidem, quas ratione rerum? Libero?</span>
+                <button id='contentEdit' onclick='showInput();'>Edit</button>
+            </div>
+        </div>
+        <script>
+            let score = 0;
+
+            function showInput() {
+                let text = document.getElementById('text1').innerHTML;
+                document.getElementById('contentEdit').style.display = 'none';
+                document.getElementById('answer1').style.display = 'block';
+                document.getElementById('textBox').value = text;
+                document.getElementById('text1').style.display = 'none';
+                document.getElementById('titleEdit').style.display = 'block';
+                document.getElementById('titleEdit').value = document.getElementById('title').innerHTML;
+                document.getElementById('title').style.display = 'none';
+            }
+
+            function submitText() {
+                let text = document.getElementById('textBox').value;
+                document.getElementById('text1').innerHTML = text;
+                document.getElementById('contentEdit').style.display = 'inline';
+                document.getElementById('answer1').style.display = 'none';
+                document.getElementById('text1').style.display = 'inline-block';
+                document.getElementById('titleEdit').style.display = 'none';
+                document.getElementById('title').innerHTML = document.getElementById('titleEdit').value;
+                document.getElementById('title').style.display = 'block';
+            }
+
+            function displayContent() {
+                let post = document.getElementById('content');
+                if(post.style.display == 'none') {
+                    post.style.display = 'block';
+                }else {
+                    post.style.display = 'none';
+                }
+            }
+
+            function changeScore(n) {
+                score += n;
+                document.getElementById('votes').innerHTML = score;
+            }
+        </script>
+    </body>
+</html>
